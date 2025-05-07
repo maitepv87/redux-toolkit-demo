@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons, resetState } from "../store/slices/pokemon";
 import { LoadingSpinner, ErrorMessage } from "../components";
-import { PokemonCard } from "../pokemons/components";
+import { PokemonCard, NextButton } from "../pokemons/components";
 
 export const PokemonPage = () => {
   const {
@@ -45,15 +45,10 @@ export const PokemonPage = () => {
         ))}
       </div>
 
-      <button
-        className="next-button"
-        aria-label="Load next page of Pokémon"
-        aria-disabled={isLoading}
-        disabled={isLoading}
-        onClick={() => dispatch(getPokemons(page))}
-      >
-        {isLoading ? "Loading..." : "Next"}
-      </button>
+      <NextButton
+        isLoading={isLoading}
+        loadNextPage={() => dispatch(getPokemons(page))}
+      />
     </div>
   );
 };
