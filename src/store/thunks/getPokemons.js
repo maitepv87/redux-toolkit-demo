@@ -1,5 +1,5 @@
-import { pokemonApi } from "../../../api/pokemonApi";
-import { loading, setPokemons, setError } from "./pokemonSlice";
+import { pokemonApi } from "../../api/pokemonApi";
+import { loading, setPokemons, setError } from "../slices/pokemonSlice";
 
 export const getPokemons = (page = 0) => {
   return async (dispatch, getState) => {

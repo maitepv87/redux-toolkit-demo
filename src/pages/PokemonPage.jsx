@@ -1,8 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, resetState } from "../store/slices/pokemon";
-import { LoadingSpinner, ErrorMessage } from "../components";
-import { PokemonCard, NextButton } from "../pokemons/components";
+import { resetState } from "../store/slices/pokemonSlice";
+import { getPokemons } from "../store/thunks/getPokemons";
+import {
+  LoadingSpinner,
+  ErrorMessage,
+  PokemonCard,
+  NextButton,
+} from "../components";
 
 export const PokemonPage = () => {
   const dispatch = useDispatch();
@@ -27,7 +32,7 @@ export const PokemonPage = () => {
       <h1>Pokemon App</h1>
       <hr />
 
-      <ErrorMessage message={error} />
+      {error && <ErrorMessage message={error} />}
 
       {isLoading ? (
         <LoadingSpinner />
@@ -36,7 +41,7 @@ export const PokemonPage = () => {
       )}
 
       <div className="pokemon-list">
-        {pokemons.map((pokemon) => (
+        {pokemons?.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
             pokemonData={pokemon}
